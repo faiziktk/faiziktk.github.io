@@ -1,5 +1,5 @@
 # [Faizan Ahmad Khattak](https://alembic.darn.es/)
-[![Gem Version](https://badge.fury.io/rb/alembic-jekyll-theme.svg)](https://badge.fury.io/rb/alembic-jekyll-theme)
+%[![Gem Version](https://badge.fury.io/rb/alembic-jekyll-theme.svg)](https://badge.fury.io/rb/alembic-jekyll-theme)
 
 ⚗ Faizan Ahmad Khattak
 ![Screenshot](https://raw.githubusercontent.com/daviddarnes/alembic/master/screenshot.png)
