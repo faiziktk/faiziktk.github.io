@@ -1,4 +1,4 @@
-# [Alembic](https://alembic.darn.es/)
+# [Faizan Ahmad Khattak](https://alembic.darn.es/)
 [![Gem Version](https://badge.fury.io/rb/alembic-jekyll-theme.svg)](https://badge.fury.io/rb/alembic-jekyll-theme)
 
 ⚗ Faizan Ahmad Khattak
