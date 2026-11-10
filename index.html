@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Academic website of Faizan Ahmad Khattak, Postdoctoral Research Fellow at the University of Leeds. Research in numerical linear algebra, matrix computations, signal processing and high-performance computing.">
+<title>Faizan Ahmad Khattak | Academic Website</title>
+
+<style>
+:root {
+  --navy: #10233f;
+  --blue: #2457a7;
+  --light: #f5f7fb;
+  --text: #283548;
+  --muted: #68758a;
+  --border: #e4e9f1;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.75;
+}
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  background: var(--navy);
+  color: white;
+  padding: 15px 6%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo { font-size: 17px; font-weight: 700; }
+nav { display: flex; flex-wrap: wrap; gap: 19px; }
+nav a { color: #e1e9f6; font-size: 13px; }
+.hero {
+  background: linear-gradient(120deg,#10233f,#234a79);
+  color: white;
+  padding: 95px 6% 90px;
+}
+.hero-inner {
+  max-width: 1050px;
+  margin: auto;
+}
+.eyebrow {
+  color: #a9c8f5;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.hero h1 {
+  font-size: clamp(36px,6vw,58px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+.hero p { color: #d8e2f0; max-width: 720px; font-size: 17px; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-primary { background: white; color: var(--navy); }
+.btn-outline { border: 1px solid #a9c8f5; color: white; }
+.container { max-width: 1050px; margin: auto; padding: 65px 6%; }
+.section-title {
+  color: var(--navy);
+  font-size: 27px;
+  margin: 0 0 25px;
+}
+.section-subtitle { color: var(--muted); margin-top: -18px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 20px;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 22px;
+  background: white;
+}
+.card h3 { color: var(--navy); margin: 0 0 9px; font-size: 17px; }
+.card p { margin: 5px 0; font-size: 14px; }
+.tag {
+  display: inline-block;
+  background: #edf3fc;
+  color: #28548c;
+  border-radius: 4px;
+  padding: 3px 9px;
+  font-size: 12px;
+  margin: 4px 3px 4px 0;
+}
+.alt { background: var(--light); }
+.pub {
+  padding: 19px 0;
+  border-bottom: 1px solid var(--border);
+}
+.pub h3 { font-size: 16px; color: var(--navy); margin: 0 0 5px; }
+.pub p { font-size: 13px; color: var(--muted); margin: 4px 0; }
+.pub a { font-size: 13px; font-weight: 600; margin-right: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.filter {
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 20px;
+  padding: 7px 14px;
+  cursor: pointer;
+  color: var(--text);
+}
+.filter.active { background: var(--navy); color: white; }
+input[type="search"] {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+}
+.timeline { border-left: 2px solid #dbe5f2; padding-left: 25px; }
+.timeline-item { position: relative; margin: 0 0 28px; }
+.timeline-item:before {
+  content:"";
+  position:absolute;
+  left:-32px; top:8px;
+  width:12px; height:12px;
+  background:var(--blue); border-radius:50%;
+}
+.timeline-item h3 { margin:0; color:var(--navy); font-size:16px; }
+.timeline-item p { margin:4px 0; color:var(--muted); font-size:14px; }
+footer {
+  background: var(--navy);
+  color: #d8e2f0;
+  text-align: center;
+  padding: 30px 15px;
+  font-size: 13px;
+}
+footer a { color: white; }
+@media(max-width:700px) {
+  .nav { align-items:flex-start; flex-direction:column; }
+  nav { gap:12px; }
+  .grid { grid-template-columns:1fr; }
+  .hero { padding-top:65px; }
+  .container { padding-top:45px; padding-bottom:45px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="nav">
+  <div class="logo">FAIZAN AHMAD KHATTAK</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#publications">Publications</a>
+    <a href="#talks">Talks</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+  <div class="eyebrow">Academic Researcher · University of Leeds</div>
+  <h1>Faizan Ahmad Khattak</h1>
+  <p>
+    Postdoctoral Research Fellow in Computer Science at the
+    University of Leeds. My research focuses on numerical
+    algorithms, matrix computations, polynomial matrix
+    decompositions, signal processing and high-performance computing.
+  </p>
+  <div class="hero-buttons">
+    <a class="btn btn-primary" href="#publications">View Publications</a>
+    <a class="btn btn-outline" href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+  </div>
+</div>
+</section>
+
+<section class="container" id="about">
+<h2 class="section-title">About Me</h2>
+<p>
+I am a postdoctoral researcher in the School of Computer Science
+at the University of Leeds. My current research involves developing
+numerical testing software to investigate the numerical properties
+of matrix multipliers on GPUs.
+</p>
+<p>
+I completed my PhD in April 2024 at the University of Strathclyde.
+My doctoral research focused on advanced polynomial matrix
+decomposition algorithms, including eigenvalue decomposition (EVD),
+singular value decomposition (SVD) and QR decomposition, with
+applications to broadband sensor arrays.
+</p>
+<p>
+My broader research interests include numerical linear algebra,
+signal processing, algorithm development, algorithm optimisation,
+embedded systems and high-performance computing.
+</p>
+<p>
+I have collaborated with researchers in signal processing and
+computational mathematics on polynomial matrix methods,
+space-time covariance estimation and broadband array processing.
+</p>
+<p>
+<a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank">Official University of Leeds profile ↗</a>
+</p>
+</section>
+
+<section class="container alt" id="research">
+<h2 class="section-title">Research Interests</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Numerical Linear Algebra</h3>
+    <p>Numerical properties, matrix algorithms, eigenvalue problems and computational accuracy.</p>
+  </div>
+  <div class="card">
+    <h3>Polynomial Matrix Decompositions</h3>
+    <p>Analytic EVD, SVD, QR decomposition and para-Hermitian matrix factorisation.</p>
+  </div>
+  <div class="card">
+    <h3>High-Performance Computing</h3>
+    <p>GPU matrix multiplication, floating-point arithmetic and numerical testing.</p>
+  </div>
+  <div class="card">
+    <h3>Signal Processing</h3>
+    <p>Broadband sensor arrays, space-time covariance matrices and MIMO systems.</p>
+  </div>
+  <div class="card">
+    <h3>Algorithm Development</h3>
+    <p>Scalable computational methods, optimisation and numerical algorithm design.</p>
+  </div>
+  <div class="card">
+    <h3>Embedded Systems</h3>
+    <p>FPGA and DSP-based implementations and computationally efficient systems.</p>
+  </div>
+</div>
+</section>
+
+<section class="container" id="projects">
+<h2 class="section-title">Research Projects</h2>
+<p class="section-subtitle">Selected research themes and ongoing work.</p>
+
+<div class="card">
+  <h3>Numerical Features of GPU Matrix Multipliers</h3>
+  <span class="tag">University of Leeds</span>
+  <span class="tag">GPU Computing</span>
+  <span class="tag">Numerical Analysis</span>
+  <p>
+  Development of numerical testing software to investigate the
+  numerical characteristics of matrix multipliers on GPUs,
+  including the effects of hardware arithmetic and floating-point
+  computation.
+  </p>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>Numerical Modelling of NVIDIA Tensor Cores</h3>
+  <span class="tag">High-Performance Computing</span>
+  <span class="tag">Mixed Precision</span>
+  <p>
+  Research into accurate numerical models of NVIDIA Tensor Cores
+  and the behaviour of mixed-precision matrix multiplication.
+  </p>
+  <p><a href="https://scicomp.leeds.ac.uk/" target="_blank">Scientific Computation Group ↗</a></p>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>Polynomial Matrix Decomposition Algorithms</h3>
+  <span class="tag">PhD Research</span>
+  <span class="tag">SVD · EVD · QR</span>
+  <p>
+  Development of advanced algorithms for polynomial matrix
+  decompositions, analytic eigenvalues and singular values,
+  and applications in broadband sensor array processing.
+  </p>
+</div>
+</section>
+
+<section class="container alt" id="publications">
+<h2 class="section-title">Publications</h2>
+<p>Selected research papers and conference contributions.</p>
+
+<input type="search" id="pubSearch" placeholder="Search publications by title, author or year...">
+
+<div class="filters">
+  <button class="filter active" data-filter="all">All</button>
+  <button class="filter" data-filter="2026">2026</button>
+  <button class="filter" data-filter="2025">2025</button>
+  <button class="filter" data-filter="2024">2024</button>
+  <button class="filter" data-filter="2023">2023</button>
+</div>
+
+<div id="publicationList">
+
+<div class="pub" data-year="2026">
+<h3>Polynomial Matrix SVD via Generalized Sequential Matrix Diagonalization</h3>
+<p>Faizan A. Khattak, Soydan Redif and Mohammed A. Bakhit · Signal Processing, 2026.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1450166.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Accurate Models of NVIDIA Tensor Cores</h3>
+<p>Faizan A. Khattak and Mantas Mikaitis · 2025.</p>
+<a href="https://scicomp.leeds.ac.uk/" target="_blank">Research group ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Extracting Analytic Singular Values from a Polynomial Matrix</h3>
+<p>Faizan Ahmad Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · Science Talks, 2025.</p>
+<a href="https://doi.org/10.1016/j.sctalk.2025.100452" target="_blank">DOI ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Scalable Analytic Eigenvalue Extraction from a Parahermitian Matrix</h3>
+<p>Faizan Ahmad Khattak, Ian Proudler and Stephan Weiss · Science Talks, 2025.</p>
+<a href="https://doi.org/10.1016/j.sctalk.2025.100434" target="_blank">DOI ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Generalized Methodology for Determining Numerical Features of Hardware Floating-Point Matrix Multipliers: Part I</h3>
+<p>Faizan A. Khattak and Mantas Mikaitis · HPEC, 2025.</p>
+<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Least-Squares Khatri-Rao Factorization of a Polynomial Matrix</h3>
+<p>Faizan A. Khattak, Fazal-E. Asim, Stephan Weiss and André L. F. de Almeida · EUSIPCO, 2025.</p>
+<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Scalable Approach for Analytic Polynomial Subspace Projection Matrices for a Space-Time Covariance Matrix</h3>
+<p>Faizan A. Khattak and co-authors · IEEE HPEC, 2024 proceedings, published 2025.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2025">
+<h3>Recovering Ground Truth Singular Values from Randomly Perturbed MIMO Transfer Functions</h3>
+<p>Mohammed Bakhit, Faizan A. Khattak and co-authors · IEEE Statistical Signal Processing Workshop, 2025.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2024">
+<h3>Scalable Analytic Eigenvalue Extraction Algorithm</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · IEEE Access, 2024, vol. 12, pp. 166652–166659.</p>
+<a href="https://doi.org/10.1109/ACCESS.2024.3485800" target="_blank">DOI ↗</a>
+</div>
+
+<div class="pub" data-year="2024">
+<h3>Extraction of Analytic Singular Values of a Polynomial Matrix</h3>
+<p>Faizan A. Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2024.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2024">
+<h3>Scalable Extraction of Analytic Eigenvalues from a Parahermitian Matrix</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2024.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2024">
+<h3>Polynomial Power Method: An Extension of the Standard Power Method to Para-Hermitian Matrices</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · Science Talks, 2024.</p>
+<a href="https://doi.org/10.1016/j.sctalk.2024.100326" target="_blank">DOI ↗</a>
+</div>
+
+<div class="pub" data-year="2024">
+<h3>Compact Order Polynomial Singular Value Decomposition of a Matrix of Analytic Functions</h3>
+<p>Mohammed Bakhit, Faizan A. Khattak and co-authors · CAMSAP, 2023 proceedings.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2023">
+<h3>Eigenvalue Decomposition of a Parahermitian Matrix: Extraction of Analytic Eigenvectors</h3>
+<p>Stephan Weiss, Ian K. Proudler, Fraser K. Coutts and Faizan A. Khattak · IEEE Transactions on Signal Processing, 2023, vol. 71, pp. 1642–1656.</p>
+<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+</div>
+
+<div class="pub" data-year="2023">
+<h3>Extension of Power Method to Para-Hermitian Matrices: Polynomial Power Method</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2023.</p>
+<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+</div>
+
+<div class="pub" data-year="2023">
+<h3>Low-Rank Para-Hermitian Matrix EVD via Polynomial Power Method with Deflation</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · CAMSAP, 2023.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2023">
+<h3>Smooth QR Decomposition of Polynomial Matrices</h3>
+<p>Faizan A. Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · CAMSAP, 2023.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+<div class="pub" data-year="2023">
+<h3>Generalized Polynomial Power Method</h3>
+<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · SSPD, 2023.</p>
+<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
+</div>
+
+</div>
+
+<p style="margin-top:25px">
+  <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">View complete Google Scholar profile ↗</a>
+  &nbsp; | &nbsp;
+  <a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">View institutional publication repository ↗</a>
+</p>
+</section>
+
+<section class="container" id="talks">
+<h2 class="section-title">Talks & Conference Presentations</h2>
+<p class="section-subtitle">Selected conference contributions and presentations.</p>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <h3>32nd European Signal Processing Conference (EUSIPCO)</h3>
+    <p>2024 · Lyon, France</p>
+    <p>Analytic singular values of polynomial matrices and scalable analytic eigenvalue extraction.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>IEEE High Performance Extreme Computing Conference</h3>
+    <p>2024 · Virtual conference</p>
+    <p>Impact of estimation errors on analytic singular values of transfer-function matrices.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>IEEE CAMSAP</h3>
+    <p>2023 · San José, Costa Rica</p>
+    <p>Polynomial matrix decomposition, low-rank EVD and smooth QR decomposition.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>Sensor Signal Processing for Defence Conference</h3>
+    <p>2023 · Edinburgh, United Kingdom</p>
+    <p>Generalized polynomial power method and sequential matrix diagonalisation.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>European Signal Processing Conference (EUSIPCO)</h3>
+    <p>2023 · Helsinki, Finland</p>
+    <p>Polynomial power method for para-Hermitian matrices.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>IEEE Asilomar Conference on Signals, Systems, and Computers</h3>
+    <p>2022 · Pacific Grove, USA</p>
+    <p>Space-time covariance matrix estimation and eigenvalue multiplicities.</p>
+  </div>
+</div>
+<p>
+<a href="https://sites.google.com/view/faiziktk/resume" target="_blank">See further conference records ↗</a>
+</p>
+</section>
+
+<section class="container alt" id="experience">
+<h2 class="section-title">Academic Experience</h2>
+<div class="timeline">
+  <div class="timeline-item">
+    <h3>Postdoctoral Research Fellow</h3>
+    <p>School of Computer Science · University of Leeds</p>
+    <p>Research on numerical features of matrix multipliers and GPU computing.</p>
+  </div>
+  <div class="timeline-item">
+    <h3>PhD in Electronic and Electrical Engineering</h3>
+    <p>University of Strathclyde · Completed April 2024</p>
+    <p>Research on polynomial matrix decomposition algorithms and broadband sensor arrays.</p>
+  </div>
+</div>
+</section>
+
+<section class="container" id="contact">
+<h2 class="section-title">Contact & Academic Profiles</h2>
+<div class="grid">
+  <div class="card">
+    <h3>University of Leeds</h3>
+    <p>School of Computer Science</p>
+    <a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank">University profile ↗</a>
+  </div>
+  <div class="card">
+    <h3>Google Scholar</h3>
+    <p>Publications and citations</p>
+    <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+  </div>
+  <div class="card">
+    <h3>ORCID</h3>
+    <p>Researcher identifier</p>
+    <a href="https://orcid.org/" target="_blank">ORCID ↗</a>
+  </div>
+  <div class="card">
+    <h3>GitHub</h3>
+    <p>Research code and projects</p>
+    <a href="https://github.com/faiziktk" target="_blank">GitHub profile ↗</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>© <span id="year"></span> Faizan Ahmad Khattak. All rights reserved.</p>
+  <p>Academic website · University of Leeds</p>
+  <p><a href="#about">Back to top ↑</a></p>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const filters = document.querySelectorAll(".filter");
+const publications = document.querySelectorAll(".pub");
+const search = document.getElementById("pubSearch");
+let selectedYear = "all";
+
+function updatePublications() {
+  const query = search.value.toLowerCase();
+  publications.forEach(pub => {
+    const matchesYear =
+      selectedYear === "all" || pub.dataset.year === selectedYear;
+    const matchesSearch = pub.textContent.toLowerCase().includes(query);
+    pub.style.display = matchesYear && matchesSearch ? "block" : "none";
+  });
+}
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    filters.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    selectedYear = button.dataset.filter;
+    updatePublications();
+  });
+});
+
+search.addEventListener("input", updatePublications);
+</script>
+
+</body>
+</html>
