@@ -1,587 +1,727 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Academic website of Faizan Ahmad Khattak, Postdoctoral Research Fellow at the University of Leeds. Research in numerical linear algebra, matrix computations, signal processing and high-performance computing.">
-<title>Faizan Ahmad Khattak | Academic Website</title>
+<title>Faizan Ahmad Khattak · Numerical Linear Algebra &amp; High-Performance Computing</title>
+<meta name="description" content="Faizan Ahmad Khattak, Postdoctoral Research Fellow at the University of Leeds. Research in numerical linear algebra, GPU matrix multipliers, polynomial matrix decompositions, signal processing and high-performance computing.">
+<meta name="author" content="Faizan Ahmad Khattak">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111419" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://faiziktk.github.io/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Faizan Ahmad Khattak · Academic Website">
+<meta property="og:description" content="Postdoctoral Research Fellow, University of Leeds. Numerical linear algebra, GPU matrix multipliers, polynomial matrix decompositions.">
+<meta property="og:url" content="https://faiziktk.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2333'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fbfaf7' text-anchor='middle'%3EFK%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Faizan Ahmad Khattak",
+  "jobTitle": "Postdoctoral Research Fellow",
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Leeds" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Strathclyde" },
+  "url": "https://faiziktk.github.io/",
+  "sameAs": [
+    "https://scholar.google.com/citations?user=IlCLGM8AAAAJ",
+    "https://github.com/faiziktk",
+    "https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak"
+  ],
+  "knowsAbout": ["Numerical linear algebra", "Polynomial matrix decompositions", "GPU computing", "Floating-point arithmetic", "Signal processing"]
+}
+</script>
 
 <style>
 :root {
-  --navy: #10233f;
-  --blue: #2457a7;
-  --light: #f5f7fb;
-  --text: #283548;
-  --muted: #68758a;
-  --border: #e4e9f1;
-  --white: #ffffff;
+  --paper: #fbfaf7;
+  --paper-2: #f3f1ec;
+  --ink: #1b2333;
+  --ink-2: #3a4252;
+  --muted: #6b7180;
+  --rule: #e4e0d8;
+  --accent: #8c3a2b;
+  --accent-soft: #f4e7e2;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --max: 1120px;
+  --gutter: clamp(20px, 5vw, 48px);
 }
-* { box-sizing: border-box; scroll-behavior: smooth; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111419;
+    --paper-2: #171b22;
+    --ink: #ece9e3;
+    --ink-2: #c9c6bf;
+    --muted: #8d919b;
+    --rule: #262b34;
+    --accent: #e3957f;
+    --accent-soft: #2a1d1a;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+
 body {
   margin: 0;
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
-  color: var(--text);
-  background: var(--white);
-  line-height: 1.75;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-a { color: var(--blue); text-decoration: none; }
-a:hover { text-decoration: underline; }
-header {
-  background: var(--navy);
-  color: white;
-  padding: 15px 6%;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+::selection { background: var(--accent); color: var(--paper); }
+
+a { color: var(--ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color .2s, text-decoration-color .2s; }
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; background: var(--ink); color: var(--paper); padding: 8px 14px; z-index: 100; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
 }
-.nav {
-  max-width: 1150px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+.site-header.scrolled { border-bottom-color: var(--rule); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px; }
+.brand { font-family: var(--serif); font-size: 19px; color: var(--ink); text-decoration: none; letter-spacing: -.01em; white-space: nowrap; }
+.brand:hover { color: var(--ink); }
+.brand span { color: var(--accent); }
+.site-nav { display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+.site-nav::-webkit-scrollbar { display: none; }
+.site-nav a { font-size: 13.5px; color: var(--muted); text-decoration: none; white-space: nowrap; position: relative; padding: 4px 0; }
+.site-nav a:hover, .site-nav a.active { color: var(--ink); }
+.site-nav a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--accent); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; padding: clamp(64px, 11vw, 132px) 0 clamp(56px, 8vw, 96px); overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 13%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 85% 30%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse 60% 70% at 85% 30%, #000 0%, transparent 70%);
 }
-.logo { font-size: 17px; font-weight: 700; }
-nav { display: flex; flex-wrap: wrap; gap: 19px; }
-nav a { color: #e1e9f6; font-size: 13px; }
-.hero {
-  background: linear-gradient(120deg,#10233f,#234a79);
-  color: white;
-  padding: 95px 6% 90px;
-}
-.hero-inner {
-  max-width: 1050px;
-  margin: auto;
-}
-.eyebrow {
-  color: #a9c8f5;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 12px;
-  font-weight: bold;
-}
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: end; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 22px; }
 .hero h1 {
-  font-size: clamp(36px,6vw,58px);
-  line-height: 1.15;
-  margin: 15px 0;
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
+  font-size: clamp(44px, 7.4vw, 86px); line-height: 1.02; letter-spacing: -.025em; margin: 0 0 28px;
 }
-.hero p { color: #d8e2f0; max-width: 720px; font-size: 17px; }
-.hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero h1 em { font-style: italic; color: var(--muted); }
+.lede { font-family: var(--serif); font-size: clamp(19px, 2vw, 22px); line-height: 1.55; color: var(--ink-2); max-width: 36ch; margin: 0 0 36px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
-  display: inline-block;
-  padding: 11px 20px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  padding: 11px 20px; border-radius: 999px; border: 1px solid var(--ink);
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
 }
-.btn-primary { background: white; color: var(--navy); }
-.btn-outline { border: 1px solid #a9c8f5; color: white; }
-.container { max-width: 1050px; margin: auto; padding: 65px 6%; }
-.section-title {
-  color: var(--navy);
-  font-size: 27px;
-  margin: 0 0 25px;
+.btn:hover { transform: translateY(-1px); }
+.btn-solid { background: var(--ink); color: var(--paper); }
+.btn-solid:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn-ghost { color: var(--ink); background: transparent; border-color: var(--rule); }
+.btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+.arrow { font-size: .9em; transition: transform .2s; }
+a:hover .arrow { transform: translate(2px, -2px); }
+
+.now { border-left: 1px solid var(--rule); padding-left: clamp(24px, 3vw, 36px); }
+.now h2 { font-family: var(--mono); font-size: 11.5px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+.now ul { list-style: none; margin: 0; padding: 0; }
+.now li { padding: 14px 0; border-top: 1px solid var(--rule); font-size: 14.5px; line-height: 1.55; }
+.now li:first-child { border-top: 0; padding-top: 0; }
+.now .k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--accent); margin-bottom: 3px; letter-spacing: .02em; }
+.now a { color: var(--ink); }
+
+/* ---------- Sections ---------- */
+section.block { padding: clamp(64px, 9vw, 112px) 0; border-top: 1px solid var(--rule); }
+section.tint { background: var(--paper-2); }
+.block .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); }
+.label { position: sticky; top: 96px; align-self: start; }
+.label .num { font-family: var(--mono); font-size: 12px; color: var(--accent); display: block; margin-bottom: 8px; }
+.label h2 { font-family: var(--serif); font-weight: 400; color: var(--ink); font-size: 30px; line-height: 1.15; letter-spacing: -.015em; margin: 0; }
+.label p { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; line-height: 1.55; }
+
+.prose { max-width: 66ch; }
+.prose p { margin: 0 0 1.15em; }
+.prose p:first-child { font-family: var(--serif); font-size: 21px; line-height: 1.55; color: var(--ink); }
+.prose .more { font-size: 14px; margin-top: 1.6em; }
+
+/* Interests */
+.interests { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.interest { padding: 26px 24px 28px 0; border-bottom: 1px solid var(--rule); }
+.interest:not(:nth-child(3n+1)) { padding-left: 24px; border-left: 1px solid var(--rule); }
+.interest .i { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.interest h3 { font-family: var(--serif); font-weight: 500; font-size: 20px; color: var(--ink); margin: 6px 0 8px; line-height: 1.25; }
+.interest p { font-size: 14px; margin: 0; color: var(--muted); line-height: 1.6; }
+
+/* Projects */
+.project { padding: 30px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 32px; }
+.project:first-child { border-top: 0; padding-top: 0; }
+.project h3 { font-family: var(--serif); font-weight: 500; font-size: 23px; line-height: 1.25; color: var(--ink); margin: 0 0 10px; letter-spacing: -.01em; }
+.project p { margin: 0; max-width: 62ch; }
+.project .meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; font-size: 13.5px; }
+.tag { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); border: 1px solid var(--rule); border-radius: 999px; padding: 3px 10px; background: var(--paper); line-height: 1.5; }
+.project .status { font-family: var(--mono); font-size: 11.5px; color: var(--accent); white-space: nowrap; padding-top: 6px; }
+
+/* Publications */
+.pub-tools { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.search { position: relative; flex: 1 1 260px; max-width: 380px; }
+.search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--muted); }
+.search input {
+  width: 100%; font: inherit; font-size: 14px; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 999px;
+  padding: 10px 16px 10px 38px; transition: border-color .2s;
 }
-.section-subtitle { color: var(--muted); margin-top: -18px; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 20px;
+.search input::placeholder { color: var(--muted); }
+.search input:hover { border-color: color-mix(in srgb, var(--ink) 30%, var(--rule)); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: inherit; font-size: 13px; color: var(--muted); background: transparent;
+  border: 1px solid transparent; border-radius: 999px; padding: 6px 12px; cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
 }
-.card {
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 22px;
-  background: white;
+.chip:hover { color: var(--ink); }
+.chip[aria-pressed="true"] { color: var(--paper); background: var(--ink); }
+.chip sup { font-family: var(--mono); font-size: 10px; margin-left: 3px; opacity: .7; }
+.type-row { margin: 4px 0 10px; }
+.type-row .chip[aria-pressed="true"] { background: transparent; color: var(--ink); border-color: var(--ink); }
+
+.year-group { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 20px; border-top: 1px solid var(--rule); padding-top: 22px; margin-top: 22px; }
+.year-group > h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--muted); margin: 0; line-height: 1.1; position: sticky; top: 90px; align-self: start; }
+.pub { padding: 0 0 22px; }
+.pub + .pub { padding-top: 22px; border-top: 1px dashed var(--rule); }
+.pub h4 { font-family: var(--serif); font-weight: 500; font-size: 19px; line-height: 1.35; color: var(--ink); margin: 0 0 6px; letter-spacing: -.005em; }
+.pub .authors { font-size: 14px; margin: 0; color: var(--ink-2); }
+.pub .authors b { font-weight: 600; color: var(--ink); }
+.pub .venue { font-size: 14px; margin: 2px 0 0; color: var(--muted); }
+.pub .venue i { font-family: var(--serif); font-size: 15.5px; }
+.pub .links { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.pub .links a { font-size: 13px; font-weight: 500; text-decoration: none; color: var(--accent); }
+.pub .links a:hover { text-decoration: underline; }
+.kind { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 6px; }
+.kind.journal { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--rule)); background: var(--accent-soft); }
+.empty { display: none; padding: 32px 0; color: var(--muted); font-style: italic; font-family: var(--serif); font-size: 18px; }
+.pub-foot { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--rule); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+
+/* Talks / timeline */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.timeline li:first-child { border-top: 0; padding-top: 0; }
+.timeline .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 4px; line-height: 1.5; }
+.timeline h3 { font-family: var(--serif); font-weight: 500; font-size: 19px; color: var(--ink); margin: 0 0 2px; line-height: 1.35; }
+.timeline .where { font-size: 13.5px; color: var(--muted); margin: 0 0 6px; }
+.timeline p { margin: 0; font-size: 15px; }
+.timeline .featured h3 { font-size: 22px; }
+.slides { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 13.5px; font-weight: 500; text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; color: var(--ink); background: var(--paper); }
+.slides:hover { border-color: var(--accent); }
+.block-foot { margin-top: 28px; font-size: 14px; }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+.contact-grid a {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 22px 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);
 }
-.card h3 { color: var(--navy); margin: 0 0 9px; font-size: 17px; }
-.card p { margin: 5px 0; font-size: 14px; }
-.tag {
-  display: inline-block;
-  background: #edf3fc;
-  color: #28548c;
-  border-radius: 4px;
-  padding: 3px 9px;
-  font-size: 12px;
-  margin: 4px 3px 4px 0;
+.contact-grid a:nth-child(odd) { padding-right: 28px; }
+.contact-grid a:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--rule); }
+.contact-grid strong { font-family: var(--serif); font-weight: 500; font-size: 21px; display: block; line-height: 1.25; }
+.contact-grid small { font-size: 13.5px; color: var(--muted); }
+.contact-grid .arrow { color: var(--muted); }
+.contact-grid a:hover strong, .contact-grid a:hover .arrow { color: var(--accent); }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--rule); padding: 32px 0 44px; font-size: 13px; color: var(--muted); }
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.site-footer a { color: var(--muted); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.no-js .reveal { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; align-items: start; }
+  .now { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .block .wrap { grid-template-columns: 1fr; gap: 28px; }
+  .label { position: static; }
+  .interests { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .interest:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+  .interest:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--rule); }
 }
-.alt { background: var(--light); }
-.pub {
-  padding: 19px 0;
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) {
+  .site-header .wrap { height: auto; padding-top: 12px; padding-bottom: 10px; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .site-nav { gap: 20px; width: 100%; }
+  .interests { grid-template-columns: 1fr; }
+  .interest:nth-child(even) { padding-left: 0; border-left: 0; }
+  .project { grid-template-columns: 1fr; }
+  .project .status { padding-top: 0; order: -1; }
+  .year-group { grid-template-columns: 1fr; gap: 10px; }
+  .year-group > h3 { position: static; font-size: 22px; }
+  .timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid a:nth-child(n) { padding-left: 0; padding-right: 0; border-left: 0; }
+  .search { max-width: none; }
 }
-.pub h3 { font-size: 16px; color: var(--navy); margin: 0 0 5px; }
-.pub p { font-size: 13px; color: var(--muted); margin: 4px 0; }
-.pub a { font-size: 13px; font-weight: 600; margin-right: 12px; }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
-.filter {
-  border: 1px solid var(--border);
-  background: white;
-  border-radius: 20px;
-  padding: 7px 14px;
-  cursor: pointer;
-  color: var(--text);
-}
-.filter.active { background: var(--navy); color: white; }
-input[type="search"] {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 14px;
-}
-.timeline { border-left: 2px solid #dbe5f2; padding-left: 25px; }
-.timeline-item { position: relative; margin: 0 0 28px; }
-.timeline-item:before {
-  content:"";
-  position:absolute;
-  left:-32px; top:8px;
-  width:12px; height:12px;
-  background:var(--blue); border-radius:50%;
-}
-.timeline-item h3 { margin:0; color:var(--navy); font-size:16px; }
-.timeline-item p { margin:4px 0; color:var(--muted); font-size:14px; }
-footer {
-  background: var(--navy);
-  color: #d8e2f0;
-  text-align: center;
-  padding: 30px 15px;
-  font-size: 13px;
-}
-footer a { color: white; }
-@media(max-width:700px) {
-  .nav { align-items:flex-start; flex-direction:column; }
-  nav { gap:12px; }
-  .grid { grid-template-columns:1fr; }
-  .hero { padding-top:65px; }
-  .container { padding-top:45px; padding-bottom:45px; }
+@media print {
+  .site-header, .pub-tools, .type-row, .actions, .hero::before { display: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  section.block { padding: 24px 0; }
+  body { background: #fff; color: #000; }
 }
 </style>
 </head>
 
-<body>
+<body class="no-js" id="top">
+<a class="skip" href="#main">Skip to content</a>
 
-<header>
-<div class="nav">
-  <div class="logo">FAIZAN AHMAD KHATTAK</div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#research">Research</a>
-    <a href="#projects">Projects</a>
-    <a href="#publications">Publications</a>
-    <a href="#talks">Talks</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</div>
+<header class="site-header" id="header">
+  <div class="wrap">
+    <a class="brand" href="#top">Faizan A. Khattak<span>.</span></a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
+<main id="main">
+
+<!-- ================= HERO ================= -->
 <section class="hero">
-<div class="hero-inner">
-  <div class="eyebrow">Academic Researcher · University of Leeds</div>
-  <h1>Faizan Ahmad Khattak</h1>
-  <p>
-    Postdoctoral Research Fellow in Computer Science at the
-    University of Leeds. My research focuses on numerical
-    algorithms, matrix computations, polynomial matrix
-    decompositions, signal processing and high-performance computing.
-  </p>
-  <div class="hero-buttons">
-    <a class="btn btn-primary" href="#publications">View Publications</a>
-    <a class="btn btn-outline" href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Postdoctoral Research Fellow · University of Leeds</p>
+      <h1>Faizan Ahmad <em>Khattak</em></h1>
+      <p class="lede">I study how matrix computations behave on real hardware, from the bit-level arithmetic of GPU tensor cores to algorithms for polynomial matrix decompositions.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#publications">Publications</a>
+        <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <span class="arrow">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/faiziktk" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+      </div>
+    </div>
+
+    <aside class="now" aria-label="Recent highlights">
+      <h2>Recently</h2>
+      <ul>
+        <li><span class="k">Nov 2026 · Talk</span>Bit-accurate models of NVIDIA Tensor Cores and AMD Matrix Cores at RICAM, Linz. <a href="talks/RICAM.pdf" target="_blank" rel="noopener">Slides</a></li>
+        <li><span class="k">2026 · Preprint</span><a href="https://arxiv.org/abs/2609.14845" target="_blank" rel="noopener">Accurate Models of AMD Matrix Cores</a></li>
+        <li><span class="k">2026 · IEEE Trans. Signal Process.</span>Analytic Gram–Schmidt orthogonalisation and QR decomposition for polynomial matrices.</li>
+      </ul>
+    </aside>
   </div>
-</div>
 </section>
 
-<section class="container" id="about">
-<h2 class="section-title">About Me</h2>
-<p>
-I am a postdoctoral researcher in the School of Computer Science
-at the University of Leeds. My current research involves developing
-numerical testing software to investigate the numerical properties
-of matrix multipliers on GPUs.
-</p>
-<p>
-I completed my PhD in April 2024 at the University of Strathclyde.
-My doctoral research focused on advanced polynomial matrix
-decomposition algorithms, including eigenvalue decomposition (EVD),
-singular value decomposition (SVD) and QR decomposition, with
-applications to broadband sensor arrays.
-</p>
-<p>
-My broader research interests include numerical linear algebra,
-signal processing, algorithm development, algorithm optimisation,
-embedded systems and high-performance computing.
-</p>
-<p>
-I have collaborated with researchers in signal processing and
-computational mathematics on polynomial matrix methods,
-space-time covariance estimation and broadband array processing.
-</p>
-<p>
-<a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank">Official University of Leeds profile ↗</a>
-</p>
+<!-- ================= ABOUT ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">01</span><h2>About</h2></div>
+    <div class="prose reveal">
+      <p>I am a postdoctoral researcher in the School of Computer Science at the University of Leeds, developing numerical testing software that reveals how matrix multipliers on GPUs actually compute.</p>
+      <p>I completed my PhD at the University of Strathclyde in April 2024. My doctoral work developed algorithms for polynomial matrix decompositions (eigenvalue, singular value and QR decompositions) with applications to broadband sensor arrays.</p>
+      <p>More broadly, I work on numerical linear algebra, signal processing, algorithm development and optimisation, embedded systems and high-performance computing. I have collaborated with researchers in signal processing and computational mathematics on polynomial matrix methods, space-time covariance estimation and broadband array processing.</p>
+      <p class="more"><a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank" rel="noopener">University of Leeds staff profile <span class="arrow">↗</span></a></p>
+    </div>
+  </div>
 </section>
 
-<section class="container alt" id="research">
-<h2 class="section-title">Research Interests</h2>
-<div class="grid">
-  <div class="card">
-    <h3>Numerical Linear Algebra</h3>
-    <p>Numerical properties, matrix algorithms, eigenvalue problems and computational accuracy.</p>
+<!-- ================= RESEARCH ================= -->
+<section class="block tint" id="research">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">02</span><h2>Research interests</h2></div>
+    <div class="interests reveal">
+      <div class="interest"><span class="i">i.</span><h3>Numerical Linear Algebra</h3><p>Numerical properties of matrix algorithms, eigenvalue problems and computational accuracy.</p></div>
+      <div class="interest"><span class="i">ii.</span><h3>Polynomial Matrix Decompositions</h3><p>Analytic EVD, SVD and QR, and para-Hermitian matrix factorisation.</p></div>
+      <div class="interest"><span class="i">iii.</span><h3>High-Performance Computing</h3><p>GPU matrix multiplication, floating-point arithmetic and numerical testing.</p></div>
+      <div class="interest"><span class="i">iv.</span><h3>Signal Processing</h3><p>Broadband sensor arrays, space-time covariance matrices and MIMO systems.</p></div>
+      <div class="interest"><span class="i">v.</span><h3>Algorithm Development</h3><p>Scalable computational methods, optimisation and numerical algorithm design.</p></div>
+      <div class="interest"><span class="i">vi.</span><h3>Embedded Systems</h3><p>FPGA- and DSP-based implementations and computationally efficient systems.</p></div>
+    </div>
   </div>
-  <div class="card">
-    <h3>Polynomial Matrix Decompositions</h3>
-    <p>Analytic EVD, SVD, QR decomposition and para-Hermitian matrix factorisation.</p>
-  </div>
-  <div class="card">
-    <h3>High-Performance Computing</h3>
-    <p>GPU matrix multiplication, floating-point arithmetic and numerical testing.</p>
-  </div>
-  <div class="card">
-    <h3>Signal Processing</h3>
-    <p>Broadband sensor arrays, space-time covariance matrices and MIMO systems.</p>
-  </div>
-  <div class="card">
-    <h3>Algorithm Development</h3>
-    <p>Scalable computational methods, optimisation and numerical algorithm design.</p>
-  </div>
-  <div class="card">
-    <h3>Embedded Systems</h3>
-    <p>FPGA and DSP-based implementations and computationally efficient systems.</p>
-  </div>
-</div>
 </section>
 
-<section class="container" id="projects">
-<h2 class="section-title">Research Projects</h2>
-<p class="section-subtitle">Selected research themes and ongoing work.</p>
-
-<div class="card">
-  <h3>Numerical Features of GPU Matrix Multipliers</h3>
-  <span class="tag">University of Leeds</span>
-  <span class="tag">GPU Computing</span>
-  <span class="tag">Numerical Analysis</span>
-  <p>
-  Development of numerical testing software to investigate the
-  numerical characteristics of matrix multipliers on GPUs,
-  including the effects of hardware arithmetic and floating-point
-  computation.
-  </p>
-</div>
-
-<div class="card" style="margin-top:16px">
-  <h3>Numerical Modelling of NVIDIA Tensor Cores</h3>
-  <span class="tag">High-Performance Computing</span>
-  <span class="tag">Mixed Precision</span>
-  <p>
-  Research into accurate numerical models of NVIDIA Tensor Cores
-  and the behaviour of mixed-precision matrix multiplication.
-  </p>
-  <p><a href="https://scicomp.leeds.ac.uk/" target="_blank">Scientific Computation Group ↗</a></p>
-</div>
-
-<div class="card" style="margin-top:16px">
-  <h3>Polynomial Matrix Decomposition Algorithms</h3>
-  <span class="tag">PhD Research</span>
-  <span class="tag">SVD · EVD · QR</span>
-  <p>
-  Development of advanced algorithms for polynomial matrix
-  decompositions, analytic eigenvalues and singular values,
-  and applications in broadband sensor array processing.
-  </p>
-</div>
+<!-- ================= PROJECTS ================= -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">03</span><h2>Projects</h2><p>Selected research themes and ongoing work.</p></div>
+    <div class="reveal">
+      <article class="project">
+        <div>
+          <h3>Numerical Features of GPU Matrix Multipliers</h3>
+          <p>Numerical testing software that probes how matrix multipliers on GPUs behave, isolating the effects of hardware arithmetic and floating-point computation.</p>
+        </div>
+        <span class="status">Ongoing · Leeds</span>
+        <div class="meta"><span class="tag">GPU computing</span><span class="tag">Numerical analysis</span><span class="tag">Floating point</span></div>
+      </article>
+      <article class="project">
+        <div>
+          <h3>Bit-accurate Models of NVIDIA Tensor Cores &amp; AMD Matrix Cores</h3>
+          <p>Accurate numerical models of tensor and matrix core units, and the behaviour of mixed-precision matrix multiplication on them.</p>
+        </div>
+        <span class="status">Ongoing · Leeds</span>
+        <div class="meta"><span class="tag">HPC</span><span class="tag">Mixed precision</span><a href="https://scicomp.leeds.ac.uk/" target="_blank" rel="noopener">Scientific Computation Group <span class="arrow">↗</span></a></div>
+      </article>
+      <article class="project">
+        <div>
+          <h3>Polynomial Matrix Decomposition Algorithms</h3>
+          <p>Algorithms for polynomial matrix decompositions, analytic eigenvalues and singular values, and their application to broadband sensor array processing.</p>
+        </div>
+        <span class="status">PhD · Strathclyde</span>
+        <div class="meta"><span class="tag">SVD · EVD · QR</span><span class="tag">Signal processing</span></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<section class="container alt" id="publications">
-<h2 class="section-title">Publications</h2>
-<p>Selected research papers and conference contributions.</p>
+<!-- ================= PUBLICATIONS ================= -->
+<section class="block tint" id="publications">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">04</span><h2>Publications</h2><p>Journal articles, conference papers and preprints.</p></div>
+    <div class="reveal">
+      <div class="pub-tools">
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="skip">Search publications</span>
+          <input type="search" id="pubSearch" placeholder="Search title, author, venue…" autocomplete="off">
+        </label>
+        <div class="chips" id="yearChips" role="group" aria-label="Filter by year"></div>
+      </div>
+      <div class="chips type-row" id="typeChips" role="group" aria-label="Filter by type"></div>
 
-<input type="search" id="pubSearch" placeholder="Search publications by title, author or year...">
+      <div id="pubList">
 
-<div class="filters">
-  <button class="filter active" data-filter="all">All</button>
-  <button class="filter" data-filter="2026">2026</button>
-  <button class="filter" data-filter="2025">2025</button>
-  <button class="filter" data-filter="2024">2024</button>
-  <button class="filter" data-filter="2023">2023</button>
-</div>
+        <div class="year-group" data-year="2026">
+          <h3>2026</h3>
+          <div>
+            <article class="pub" data-type="preprint">
+              <h4>Accurate Models of AMD Matrix Cores</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mantas Mikaitis, Carlo J. Graziani</p>
+              <p class="venue"><i>arXiv preprint</i></p>
+              <div class="links"><span class="kind">Preprint</span><a href="https://arxiv.org/abs/2609.14845" target="_blank" rel="noopener">arXiv ↗</a></div>
+            </article>
+            <article class="pub" data-type="journal">
+              <h4>Analytic Gram–Schmidt Orthogonalization and QR Decomposition for Polynomial Matrices</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss, Sebastian J. Schlecht</p>
+              <p class="venue"><i>IEEE Transactions on Signal Processing</i></p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://ieeexplore.ieee.org/abstract/document/11630656" target="_blank" rel="noopener">IEEE Xplore ↗</a></div>
+            </article>
+            <article class="pub" data-type="journal">
+              <h4>Polynomial Matrix SVD via Generalized Sequential Matrix Diagonalization</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Soydan Redif, Mohammed A. Bakhit</p>
+              <p class="venue"><i>Signal Processing</i></p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://strathprints.strath.ac.uk/view/author/1450166.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+          </div>
+        </div>
 
-<div id="publicationList">
-<div class="pub" data-year="2026">
+        <div class="year-group" data-year="2025">
+          <h3>2025</h3>
+          <div>
+            <article class="pub" data-type="preprint">
+              <h4>Accurate Models of NVIDIA Tensor Cores</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mantas Mikaitis</p>
+              <p class="venue"><i>Scientific Computation Group, University of Leeds</i></p>
+              <div class="links"><span class="kind">Preprint</span><a href="https://scicomp.leeds.ac.uk/" target="_blank" rel="noopener">Research group ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Generalized Methodology for Determining Numerical Features of Hardware Floating-Point Matrix Multipliers: Part I</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mantas Mikaitis</p>
+              <p class="venue"><i>IEEE High Performance Extreme Computing Conference (HPEC)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Least-Squares Khatri–Rao Factorization of a Polynomial Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Fazal-E. Asim, Stephan Weiss, André L. F. de Almeida</p>
+              <p class="venue"><i>European Signal Processing Conference (EUSIPCO)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Recovering Ground Truth Singular Values from Randomly Perturbed MIMO Transfer Functions</h4>
+              <p class="authors">Mohammed Bakhit, <b>Faizan A. Khattak</b>, et al.</p>
+              <p class="venue"><i>IEEE Statistical Signal Processing Workshop (SSP)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Scalable Approach for Analytic Polynomial Subspace Projection Matrices for a Space-Time Covariance Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, et al.</p>
+              <p class="venue"><i>IEEE HPEC 2024 Proceedings</i> (published 2025)</p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="journal">
+              <h4>Extracting Analytic Singular Values from a Polynomial Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mohammed Bakhit, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>Science Talks</i></p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://doi.org/10.1016/j.sctalk.2025.100452" target="_blank" rel="noopener">DOI ↗</a></div>
+            </article>
+            <article class="pub" data-type="journal">
+              <h4>Scalable Analytic Eigenvalue Extraction from a Parahermitian Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>Science Talks</i></p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://doi.org/10.1016/j.sctalk.2025.100434" target="_blank" rel="noopener">DOI ↗</a></div>
+            </article>
+          </div>
+        </div>
 
-  <h3>Accurate Models of AMD Matrix Cores</h3>
+        <div class="year-group" data-year="2024">
+          <h3>2024</h3>
+          <div>
+            <article class="pub" data-type="journal">
+              <h4>Scalable Analytic Eigenvalue Extraction Algorithm</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>IEEE Access</i>, vol. 12, pp. 166652–166659</p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://doi.org/10.1109/ACCESS.2024.3485800" target="_blank" rel="noopener">DOI ↗</a></div>
+            </article>
+            <article class="pub" data-type="journal">
+              <h4>Polynomial Power Method: An Extension of the Standard Power Method to Para-Hermitian Matrices</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>Science Talks</i></p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://doi.org/10.1016/j.sctalk.2024.100326" target="_blank" rel="noopener">DOI ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Extraction of Analytic Singular Values of a Polynomial Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mohammed Bakhit, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>European Signal Processing Conference (EUSIPCO)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Scalable Extraction of Analytic Eigenvalues from a Parahermitian Matrix</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>European Signal Processing Conference (EUSIPCO)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Compact Order Polynomial Singular Value Decomposition of a Matrix of Analytic Functions</h4>
+              <p class="authors">Mohammed Bakhit, <b>Faizan A. Khattak</b>, et al.</p>
+              <p class="venue"><i>IEEE CAMSAP 2023 Proceedings</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+          </div>
+        </div>
 
-  <p>Faizan A. Khattak, Mantas Mikaitis and Carlo J. Graziani · 2026 (Preprint).</p>
+        <div class="year-group" data-year="2023">
+          <h3>2023</h3>
+          <div>
+            <article class="pub" data-type="journal">
+              <h4>Eigenvalue Decomposition of a Parahermitian Matrix: Extraction of Analytic Eigenvectors</h4>
+              <p class="authors">Stephan Weiss, Ian K. Proudler, Fraser K. Coutts, <b>Faizan A. Khattak</b></p>
+              <p class="venue"><i>IEEE Transactions on Signal Processing</i>, vol. 71, pp. 1642–1656</p>
+              <div class="links"><span class="kind journal">Journal</span><a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Extension of Power Method to Para-Hermitian Matrices: Polynomial Power Method</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>European Signal Processing Conference (EUSIPCO)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Low-Rank Para-Hermitian Matrix EVD via Polynomial Power Method with Deflation</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>IEEE CAMSAP</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Smooth QR Decomposition of Polynomial Matrices</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Mohammed Bakhit, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>IEEE CAMSAP</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+            <article class="pub" data-type="conference">
+              <h4>Generalized Polynomial Power Method</h4>
+              <p class="authors"><b>Faizan A. Khattak</b>, Ian K. Proudler, Stephan Weiss</p>
+              <p class="venue"><i>Sensor Signal Processing for Defence Conference (SSPD)</i></p>
+              <div class="links"><span class="kind">Conference</span><a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Record ↗</a></div>
+            </article>
+          </div>
+        </div>
 
-  <a href="https://arxiv.org/abs/2609.14845" target="_blank" rel="noopener noreferrer">
-    arXiv ↗
-  </a>
+      </div>
+      <p class="empty" id="pubEmpty">No publications match that search.</p>
 
-</div>
-
-
-<div class="pub" data-year="2026">
-
-  <h3>Analytic Gram-Schmidt Orthogonalization and QR Decomposition for Polynomial Matrices</h3>
-
-  <p>Faizan A. Khattak, Ian K. Proudler, Stephan Weiss and Sebastian J. Schlecht · IEEE Trans. Sig. Proc. 2026.</p>
-
-  <a href="https://ieeexplore.ieee.org/abstract/document/11630656" target="_blank">Research record ↗</a>
-
-</div>
-  
-  
-<div class="pub" data-year="2026">
-<h3>Polynomial Matrix SVD via Generalized Sequential Matrix Diagonalization</h3>
-<p>Faizan A. Khattak, Soydan Redif and Mohammed A. Bakhit · Signal Processing, 2026.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1450166.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Accurate Models of NVIDIA Tensor Cores</h3>
-<p>Faizan A. Khattak and Mantas Mikaitis · 2025.</p>
-<a href="https://scicomp.leeds.ac.uk/" target="_blank">Research group ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Extracting Analytic Singular Values from a Polynomial Matrix</h3>
-<p>Faizan Ahmad Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · Science Talks, 2025.</p>
-<a href="https://doi.org/10.1016/j.sctalk.2025.100452" target="_blank">DOI ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Scalable Analytic Eigenvalue Extraction from a Parahermitian Matrix</h3>
-<p>Faizan Ahmad Khattak, Ian Proudler and Stephan Weiss · Science Talks, 2025.</p>
-<a href="https://doi.org/10.1016/j.sctalk.2025.100434" target="_blank">DOI ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Generalized Methodology for Determining Numerical Features of Hardware Floating-Point Matrix Multipliers: Part I</h3>
-<p>Faizan A. Khattak and Mantas Mikaitis · HPEC, 2025.</p>
-<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Least-Squares Khatri-Rao Factorization of a Polynomial Matrix</h3>
-<p>Faizan A. Khattak, Fazal-E. Asim, Stephan Weiss and André L. F. de Almeida · EUSIPCO, 2025.</p>
-<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Scalable Approach for Analytic Polynomial Subspace Projection Matrices for a Space-Time Covariance Matrix</h3>
-<p>Faizan A. Khattak and co-authors · IEEE HPEC, 2024 proceedings, published 2025.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2025">
-<h3>Recovering Ground Truth Singular Values from Randomly Perturbed MIMO Transfer Functions</h3>
-<p>Mohammed Bakhit, Faizan A. Khattak and co-authors · IEEE Statistical Signal Processing Workshop, 2025.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2024">
-<h3>Scalable Analytic Eigenvalue Extraction Algorithm</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · IEEE Access, 2024, vol. 12, pp. 166652–166659.</p>
-<a href="https://doi.org/10.1109/ACCESS.2024.3485800" target="_blank">DOI ↗</a>
-</div>
-
-<div class="pub" data-year="2024">
-<h3>Extraction of Analytic Singular Values of a Polynomial Matrix</h3>
-<p>Faizan A. Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2024.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2024">
-<h3>Scalable Extraction of Analytic Eigenvalues from a Parahermitian Matrix</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2024.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2024">
-<h3>Polynomial Power Method: An Extension of the Standard Power Method to Para-Hermitian Matrices</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · Science Talks, 2024.</p>
-<a href="https://doi.org/10.1016/j.sctalk.2024.100326" target="_blank">DOI ↗</a>
-</div>
-
-<div class="pub" data-year="2024">
-<h3>Compact Order Polynomial Singular Value Decomposition of a Matrix of Analytic Functions</h3>
-<p>Mohammed Bakhit, Faizan A. Khattak and co-authors · CAMSAP, 2023 proceedings.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2023">
-<h3>Eigenvalue Decomposition of a Parahermitian Matrix: Extraction of Analytic Eigenvectors</h3>
-<p>Stephan Weiss, Ian K. Proudler, Fraser K. Coutts and Faizan A. Khattak · IEEE Transactions on Signal Processing, 2023, vol. 71, pp. 1642–1656.</p>
-<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
-</div>
-
-<div class="pub" data-year="2023">
-<h3>Extension of Power Method to Para-Hermitian Matrices: Polynomial Power Method</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · EUSIPCO, 2023.</p>
-<a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
-</div>
-
-<div class="pub" data-year="2023">
-<h3>Low-Rank Para-Hermitian Matrix EVD via Polynomial Power Method with Deflation</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · CAMSAP, 2023.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2023">
-<h3>Smooth QR Decomposition of Polynomial Matrices</h3>
-<p>Faizan A. Khattak, Mohammed Bakhit, Ian K. Proudler and Stephan Weiss · CAMSAP, 2023.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-<div class="pub" data-year="2023">
-<h3>Generalized Polynomial Power Method</h3>
-<p>Faizan A. Khattak, Ian K. Proudler and Stephan Weiss · SSPD, 2023.</p>
-<a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">Research record ↗</a>
-</div>
-
-</div>
-
-<p style="margin-top:25px">
-  <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">View complete Google Scholar profile ↗</a>
-  &nbsp; | &nbsp;
-  <a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank">View institutional publication repository ↗</a>
-</p>
+      <div class="pub-foot">
+        <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Full list on Google Scholar <span class="arrow">↗</span></a>
+        <a href="https://strathprints.strath.ac.uk/view/author/1194705.html" target="_blank" rel="noopener">Strathprints repository <span class="arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="container" id="talks">
-<h2 class="section-title">Talks & Conference Presentations</h2>
-<p class="section-subtitle">Selected conference contributions and presentations.</p>
-
-<div class="timeline">
-<div class="timeline-item">
-  <h3>Inside the Black Box: Bit-accurate Models of NVIDIA Tensor Cores and AMD Matrix Cores</h3>
-  <p>4 November 2026 · RICAM, Linz, Austria</p>
-  <p>
-    A presentation on bit-accurate modelling of NVIDIA Tensor Cores
-    and AMD Matrix Cores, exploring their numerical behaviour and
-    computational characteristics.
-  </p>
-  <p>
-    <a href="talks/RICAM.pdf" target="_blank" rel="noopener noreferrer">
-      View Slides (PDF) ↗
-    </a>
-  </p>
-</div>
-  <div class="timeline-item">
-    <h3>32nd European Signal Processing Conference (EUSIPCO)</h3>
-    <p>2024 · Lyon, France</p>
-    <p>Analytic singular values of polynomial matrices and scalable analytic eigenvalue extraction.</p>
+<!-- ================= TALKS ================= -->
+<section class="block" id="talks">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">05</span><h2>Talks</h2><p>Conference contributions and invited presentations.</p></div>
+    <div class="reveal">
+      <ol class="timeline">
+        <li class="featured">
+          <span class="when">4 Nov 2026</span>
+          <div>
+            <h3>Inside the Black Box: Bit-accurate Models of NVIDIA Tensor Cores and AMD Matrix Cores</h3>
+            <p class="where">RICAM · Linz, Austria</p>
+            <p>The numerical behaviour of tensor and matrix core units, and how to model them bit for bit.</p>
+            <a class="slides" href="talks/RICAM.pdf" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4M8 21h8"/></svg>
+              Slides (PDF)
+            </a>
+          </div>
+        </li>
+        <li><span class="when">2024</span><div><h3>32nd European Signal Processing Conference (EUSIPCO)</h3><p class="where">Lyon, France</p><p>Analytic singular values of polynomial matrices and scalable analytic eigenvalue extraction.</p></div></li>
+        <li><span class="when">2024</span><div><h3>IEEE High Performance Extreme Computing Conference</h3><p class="where">Virtual</p><p>Impact of estimation errors on analytic singular values of transfer-function matrices.</p></div></li>
+        <li><span class="when">2023</span><div><h3>IEEE CAMSAP</h3><p class="where">San José, Costa Rica</p><p>Polynomial matrix decomposition, low-rank EVD and smooth QR decomposition.</p></div></li>
+        <li><span class="when">2023</span><div><h3>Sensor Signal Processing for Defence Conference</h3><p class="where">Edinburgh, United Kingdom</p><p>Generalized polynomial power method and sequential matrix diagonalisation.</p></div></li>
+        <li><span class="when">2023</span><div><h3>European Signal Processing Conference (EUSIPCO)</h3><p class="where">Helsinki, Finland</p><p>Polynomial power method for para-Hermitian matrices.</p></div></li>
+        <li><span class="when">2022</span><div><h3>IEEE Asilomar Conference on Signals, Systems, and Computers</h3><p class="where">Pacific Grove, USA</p><p>Space-time covariance matrix estimation and eigenvalue multiplicities.</p></div></li>
+      </ol>
+      <p class="block-foot"><a href="https://sites.google.com/view/faiziktk/resume" target="_blank" rel="noopener">Further conference records <span class="arrow">↗</span></a></p>
+    </div>
   </div>
-  <div class="timeline-item">
-    <h3>IEEE High Performance Extreme Computing Conference</h3>
-    <p>2024 · Virtual conference</p>
-    <p>Impact of estimation errors on analytic singular values of transfer-function matrices.</p>
-  </div>
-  <div class="timeline-item">
-    <h3>IEEE CAMSAP</h3>
-    <p>2023 · San José, Costa Rica</p>
-    <p>Polynomial matrix decomposition, low-rank EVD and smooth QR decomposition.</p>
-  </div>
-  <div class="timeline-item">
-    <h3>Sensor Signal Processing for Defence Conference</h3>
-    <p>2023 · Edinburgh, United Kingdom</p>
-    <p>Generalized polynomial power method and sequential matrix diagonalisation.</p>
-  </div>
-  <div class="timeline-item">
-    <h3>European Signal Processing Conference (EUSIPCO)</h3>
-    <p>2023 · Helsinki, Finland</p>
-    <p>Polynomial power method for para-Hermitian matrices.</p>
-  </div>
-  <div class="timeline-item">
-    <h3>IEEE Asilomar Conference on Signals, Systems, and Computers</h3>
-    <p>2022 · Pacific Grove, USA</p>
-    <p>Space-time covariance matrix estimation and eigenvalue multiplicities.</p>
-  </div>
-</div>
-<p>
-<a href="https://sites.google.com/view/faiziktk/resume" target="_blank">See further conference records ↗</a>
-</p>
 </section>
 
-<section class="container alt" id="experience">
-<h2 class="section-title">Academic Experience</h2>
-<div class="timeline">
-  <div class="timeline-item">
-    <h3>Postdoctoral Research Fellow</h3>
-    <p>School of Computer Science · University of Leeds</p>
-    <p>Research on numerical features of matrix multipliers and GPU computing.</p>
+<!-- ================= EXPERIENCE ================= -->
+<section class="block tint" id="experience">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">06</span><h2>Experience</h2></div>
+    <ol class="timeline reveal">
+      <li><span class="when">Present</span><div><h3>Postdoctoral Research Fellow</h3><p class="where">School of Computer Science · University of Leeds</p><p>Numerical features of matrix multipliers and GPU computing.</p></div></li>
+      <li><span class="when">Apr 2024</span><div><h3>PhD, Electronic &amp; Electrical Engineering</h3><p class="where">University of Strathclyde</p><p>Polynomial matrix decomposition algorithms and broadband sensor arrays.</p></div></li>
+    </ol>
   </div>
-  <div class="timeline-item">
-    <h3>PhD in Electronic and Electrical Engineering</h3>
-    <p>University of Strathclyde · Completed April 2024</p>
-    <p>Research on polynomial matrix decomposition algorithms and broadband sensor arrays.</p>
-  </div>
-</div>
 </section>
 
-<section class="container" id="contact">
-<h2 class="section-title">Contact & Academic Profiles</h2>
-<div class="grid">
-  <div class="card">
-    <h3>University of Leeds</h3>
-    <p>School of Computer Science</p>
-    <a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank">University profile ↗</a>
+<!-- ================= CONTACT ================= -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="label reveal"><span class="num">07</span><h2>Contact &amp; profiles</h2><p>School of Computer Science, University of Leeds, United Kingdom.</p></div>
+    <div class="contact-grid reveal">
+      <a href="https://eps.leeds.ac.uk/computing/staff/16559/faizan-ahmad-khattak" target="_blank" rel="noopener"><span><strong>University of Leeds</strong><small>Staff profile &amp; contact details</small></span><span class="arrow">↗</span></a>
+      <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&amp;hl=en" target="_blank" rel="noopener"><span><strong>Google Scholar</strong><small>Publications &amp; citations</small></span><span class="arrow">↗</span></a>
+      <!-- TODO: replace with your ORCID iD, e.g. https://orcid.org/0000-0000-0000-0000 -->
+      <a href="https://orcid.org/" target="_blank" rel="noopener"><span><strong>ORCID</strong><small>Researcher identifier</small></span><span class="arrow">↗</span></a>
+      <a href="https://github.com/faiziktk" target="_blank" rel="noopener"><span><strong>GitHub</strong><small>Research code &amp; software</small></span><span class="arrow">↗</span></a>
+    </div>
   </div>
-  <div class="card">
-    <h3>Google Scholar</h3>
-    <p>Publications and citations</p>
-    <a href="https://scholar.google.com/citations?user=IlCLGM8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
-  </div>
-  <div class="card">
-    <h3>ORCID</h3>
-    <p>Researcher identifier</p>
-    <a href="https://orcid.org/" target="_blank">ORCID ↗</a>
-  </div>
-  <div class="card">
-    <h3>GitHub</h3>
-    <p>Research code and projects</p>
-    <a href="https://github.com/faiziktk" target="_blank">GitHub profile ↗</a>
-  </div>
-</div>
 </section>
 
-<footer>
-  <p>© <span id="year"></span> Faizan Ahmad Khattak. All rights reserved.</p>
-  <p>Academic website · University of Leeds</p>
-  <p><a href="#about">Back to top ↑</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Faizan Ahmad Khattak</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
 </footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  document.body.classList.remove("no-js");
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-const filters = document.querySelectorAll(".filter");
-const publications = document.querySelectorAll(".pub");
-const search = document.getElementById("pubSearch");
-let selectedYear = "all";
+  // Header border on scroll
+  var header = document.getElementById("header");
+  var onScroll = function () { header.classList.toggle("scrolled", window.scrollY > 8); };
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-function updatePublications() {
-  const query = search.value.toLowerCase();
-  publications.forEach(pub => {
-    const matchesYear =
-      selectedYear === "all" || pub.dataset.year === selectedYear;
-    const matchesSearch = pub.textContent.toLowerCase().includes(query);
-    pub.style.display = matchesYear && matchesSearch ? "block" : "none";
-  });
-}
+  // Reveal on scroll
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
 
-filters.forEach(button => {
-  button.addEventListener("click", () => {
-    filters.forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
-    selectedYear = button.dataset.filter;
-    updatePublications();
-  });
-});
+    // Active nav link
+    var links = {};
+    document.querySelectorAll(".site-nav a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+    var navIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && links[e.target.id]) {
+          Object.values(links).forEach(function (a) { a.classList.remove("active"); });
+          links[e.target.id].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("section[id]").forEach(function (s) { navIO.observe(s); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  }
 
-search.addEventListener("input", updatePublications);
+  // Publications: year + type filters with counts, and search
+  var pubs = Array.prototype.slice.call(document.querySelectorAll(".pub"));
+  var groups = document.querySelectorAll(".year-group");
+  var search = document.getElementById("pubSearch");
+  var empty = document.getElementById("pubEmpty");
+  var state = { year: "all", type: "all" };
+
+  function yearOf(p) { return p.closest(".year-group").dataset.year; }
+  function makeChips(container, key, options) {
+    options.forEach(function (o) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.dataset.value = o.value;
+      b.setAttribute("aria-pressed", o.value === "all" ? "true" : "false");
+      b.innerHTML = o.label + "<sup>" + o.count + "</sup>";
+      b.addEventListener("click", function () {
+        state[key] = o.value;
+        container.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c === b ? "true" : "false"); });
+        update();
+      });
+      container.appendChild(b);
+    });
+  }
+  var years = Array.prototype.map.call(groups, function (g) { return g.dataset.year; });
+  makeChips(document.getElementById("yearChips"), "year",
+    [{ value: "all", label: "All", count: pubs.length }].concat(years.map(function (y) {
+      return { value: y, label: y, count: pubs.filter(function (p) { return yearOf(p) === y; }).length };
+    })));
+  var types = [["journal", "Journal"], ["conference", "Conference"], ["preprint", "Preprint"]];
+  makeChips(document.getElementById("typeChips"), "type",
+    [{ value: "all", label: "All types", count: pubs.length }].concat(types.map(function (t) {
+      return { value: t[0], label: t[1], count: pubs.filter(function (p) { return p.dataset.type === t[0]; }).length };
+    })));
+
+  function update() {
+    var q = search.value.trim().toLowerCase();
+    var shown = 0;
+    pubs.forEach(function (p) {
+      var ok = (state.year === "all" || yearOf(p) === state.year)
+            && (state.type === "all" || p.dataset.type === state.type)
+            && (!q || (p.textContent + " " + yearOf(p)).toLowerCase().indexOf(q) !== -1);
+      p.hidden = !ok; if (ok) shown++;
+    });
+    groups.forEach(function (g) {
+      var visible = g.querySelectorAll(".pub:not([hidden])");
+      g.hidden = visible.length === 0;
+      // keep the dashed separators tidy when items are hidden
+      g.querySelectorAll(".pub").forEach(function (p) { p.style.borderTop = ""; p.style.paddingTop = ""; });
+      if (visible[0]) { visible[0].style.borderTop = "0"; visible[0].style.paddingTop = "0"; }
+    });
+    empty.style.display = shown ? "none" : "block";
+  }
+  search.addEventListener("input", update);
+})();
 </script>
-
 </body>
 </html>
