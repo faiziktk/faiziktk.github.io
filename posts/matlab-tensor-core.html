@@ -324,6 +324,254 @@ D = B200TC(1, A, B, 1, 0, ...
     <li><code>model_validation/</code> — Model validation data.</li>
   </ul>
 
+  
+<h2>8. Multi-Word Arithmetic: Using Low-Precision Tensor Cores for Higher Accuracy</h2>
+
+<p>
+  One particularly interesting application of Tensor Cores is
+  multi-word arithmetic. This technique uses several low-precision
+  floating-point numbers to represent a single higher-precision
+  number.
+</p>
+
+<p>
+  The motivation is straightforward: specialised matrix hardware
+  can perform low-precision matrix multiplication efficiently,
+  but scientific computing applications often require much
+  higher numerical accuracy.
+</p>
+
+<p>
+  Multi-word arithmetic provides a way to bridge this gap.
+  Instead of representing a number using only one floating-point
+  word, we represent it as the sum of multiple floating-point
+  components.
+</p>
+
+<h3>8.1 The basic idea</h3>
+
+<p>
+  Consider a real number x. We approximate it using a sum
+  of p floating-point numbers:
+</p>
+
+<div class="note">
+  <strong>Multi-word representation:</strong>
+  <p>
+    x ≈ x<sub>1</sub> + x<sub>2</sub> + ... + x<sub>p</sub>
+  </p>
+</div>
+
+<p>
+  Here, each component is stored in a lower-precision
+  floating-point format. The first component contains the
+  leading significant bits, while subsequent components
+  represent the remaining error.
+</p>
+
+<p>
+  For example:
+</p>
+
+<ul>
+  <li><strong>1-word:</strong> One floating-point component.</li>
+  <li><strong>2-word:</strong> Two components representing one number.</li>
+  <li><strong>3-word:</strong> Three components.</li>
+  <li><strong>4-word:</strong> Four components.</li>
+</ul>
+
+<p>
+  Increasing the number of words can improve the effective
+  precision of the representation, although the actual accuracy
+  also depends on the decomposition and accumulation algorithms.
+</p>
+
+<h3>8.2 Extending the idea to matrix multiplication</h3>
+
+<p>
+  Let A and B be two matrices. Their product is:
+</p>
+
+<div class="note">
+  C = AB
+</div>
+
+<p>
+  Suppose each matrix is represented using p low-precision
+  components:
+</p>
+
+<div class="note">
+  A ≈ A<sub>1</sub> + A<sub>2</sub> + ... + A<sub>p</sub>
+  <br>
+  B ≈ B<sub>1</sub> + B<sub>2</sub> + ... + B<sub>p</sub>
+</div>
+
+<p>
+  Expanding the matrix product gives:
+</p>
+
+<div class="note">
+  C ≈ Σ<sub>i=1</sub><sup>p</sup>
+  Σ<sub>j=1</sub><sup>p</sup>
+  A<sub>i</sub>B<sub>j</sub>
+</div>
+
+<p>
+  Each term is a matrix multiplication that can potentially
+  be evaluated using a low-precision Tensor Core model.
+  The resulting partial products must then be accumulated
+  carefully.
+</p>
+
+<p>
+  This creates a trade-off between computational cost and
+  numerical accuracy. More words generally require more
+  matrix multiplications and more accumulation operations.
+</p>
+
+<h3>8.3 Why use Tensor Cores?</h3>
+
+<p>
+  NVIDIA Tensor Cores are specialised units designed to
+  accelerate matrix multiplication. Their low-precision
+  arithmetic capabilities make them interesting building
+  blocks for multi-word algorithms.
+</p>
+
+<p>
+  Rather than relying on a single high-precision matrix
+  multiplication, a multi-word algorithm combines several
+  lower-precision products.
+</p>
+
+<p>
+  The MATLAB Tensor Core toolbox provides numerical models
+  that allow researchers to investigate the behaviour of
+  these matrix operations without requiring physical access
+  to every GPU architecture being modelled.
+</p>
+
+<h3>8.4 Understanding the experiment</h3>
+
+<p>
+  The multi-word arithmetic experiment in the repository's
+  <code>experiments/</code> directory can be used as a starting
+  point for investigating how the number of floating-point
+  components affects matrix multiplication accuracy.
+</p>
+
+<p>
+  The general experimental procedure is:
+</p>
+
+<ol>
+  <li>Generate test matrices A and B.</li>
+  <li>Compute a high-precision reference product.</li>
+  <li>Decompose the matrices into multiple low-precision words.</li>
+  <li>Evaluate the partial matrix products using the selected
+      Tensor Core model.</li>
+  <li>Accumulate the partial products.</li>
+  <li>Compare the result against the reference product.</li>
+  <li>Repeat for different word counts and floating-point formats.</li>
+</ol>
+
+<h3>8.5 Measuring numerical accuracy</h3>
+
+<p>
+  A useful way to compare the computed matrix product with
+  a reference result is the relative Frobenius norm error:
+</p>
+
+<div class="note">
+  Relative error =
+  ||C<sub>computed</sub> - C<sub>reference</sub>||<sub>F</sub>
+  /
+  ||C<sub>reference</sub>||<sub>F</sub>
+</div>
+
+<p>
+  Here, C<sub>reference</sub> is computed using a higher-precision
+  reference calculation, while C<sub>computed</sub> is the
+  result produced by the multi-word algorithm.
+</p>
+
+<p>
+  This metric provides an indication of how closely the
+  multi-word result approximates the reference product.
+</p>
+
+<h3>8.6 What should we investigate?</h3>
+
+<p>
+  Several questions make this experiment particularly
+  interesting from a numerical linear algebra perspective:
+</p>
+
+<ul>
+  <li>How does accuracy change as the number of words increases?</li>
+  <li>How does the choice of FP8, FP16 or BF16 affect the result?</li>
+  <li>How does the accumulation strategy influence the final error?</li>
+  <li>Do different Tensor Core generations produce different
+      numerical behaviour?</li>
+  <li>What is the computational cost of obtaining higher accuracy?</li>
+</ul>
+
+<p>
+  These questions help us understand whether low-precision
+  hardware can be used to perform matrix multiplication
+  with accuracy approaching higher-precision arithmetic.
+</p>
+
+<h3>8.7 Reproducing the experiment</h3>
+
+<p>
+  To reproduce the experiment, first clone the MATLAB Tensor
+  Core repository:
+</p>
+
+<pre><code>git clone https://github.com/north-numerical-computing/MATLAB-tensor-core.git
+
+cd MATLAB-tensor-core</code></pre>
+
+<p>
+  Configure CPFloat and add the model directories to your
+  MATLAB path:
+</p>
+
+<pre><code>addpath('models');
+addpath('models/tools');</code></pre>
+
+<p>
+  Next, navigate to the <code>experiments/</code> directory
+  and identify the multi-word arithmetic experiment script.
+  Follow the script's configuration and execution instructions
+  to reproduce the original results.
+</p>
+
+<p>
+  The original source code and experimental files are available
+  here:
+</p>
+
+<p>
+  <a href="https://github.com/north-numerical-computing/MATLAB-tensor-core/tree/main/experiments"
+     target="_blank" rel="noopener noreferrer">
+    Browse MATLAB Tensor Core experiments →
+  </a>
+</p>
+
+<div class="note">
+  <strong>Research note:</strong>
+  The mathematical discussion above describes the general
+  multi-word matrix multiplication approach. The exact
+  floating-point formats, decomposition algorithm, model
+  functions and experiment parameters should be taken from
+  the corresponding MATLAB experiment script.
+</div>
+
+<h2>9. Conclusion</h2>
+
   <h2>8. Conclusion</h2>
 
   <p>
