@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Modelling NVIDIA Tensor Cores and AMD Matrix Cores | Faizan</title>
+
+  <meta name="description" content="A practical introduction to MATLAB models of NVIDIA Tensor Cores and AMD Matrix Cores, including installation, FP16 and FP8 examples.">
+
+  <style>
+    body {
+      max-width: 850px;
+      margin: 60px auto;
+      padding: 0 24px;
+      font-family: Arial, sans-serif;
+      line-height: 1.8;
+      color: #252525;
+      background: #fff;
+    }
+
+    a {
+      color: #2864a0;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    header {
+      margin-bottom: 55px;
+    }
+
+    header a { margin-right: 20px; }
+
+    h1 {
+      font-size: 36px;
+      line-height: 1.25;
+    }
+
+    h2 {
+      margin-top: 45px;
+      font-size: 25px;
+    }
+
+    .meta {
+      color: #777;
+      font-size: 14px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 18px;
+      overflow-x: auto;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: monospace;
+    }
+
+    .note {
+      background: #f5f7fa;
+      padding: 15px 20px;
+      border-left: 3px solid #2864a0;
+      margin: 25px 0;
+    }
+
+    footer {
+      margin-top: 65px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      color: #888;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="/">Faizan A. Khattak</a>
+  <a href="/blog/">Blog</a>
+  <a href="/">Home</a>
+</header>
+
+<main>
+
+  <p class="meta">
+    GPU Computing · Numerical Linear Algebra · MATLAB
+  </p>
+
+  <h1>
+    Modelling NVIDIA Tensor Cores and AMD Matrix Cores Using MATLAB
+  </h1>
+
+  <p class="meta">
+    By Faizan A. Khattak · 18 November 2026
+  </p>
+
+  <p>
+    Modern GPUs contain specialised hardware units designed to
+    accelerate matrix multiplication. NVIDIA Tensor Cores and
+    AMD Matrix Cores are examples of such units.
+  </p>
+
+  <p>
+    While these units provide substantial computational
+    performance, understanding their numerical behaviour
+    is equally important. Different floating-point formats,
+    rounding modes and accumulation strategies can affect
+    the accuracy of matrix computations.
+  </p>
+
+  <p>
+    In this article, I introduce a MATLAB toolbox that provides
+    models of NVIDIA Tensor Cores and AMD Matrix Cores.
+    We will look at how to set up the toolbox and perform
+    matrix multiplication using different floating-point
+    precisions.
+  </p>
+
+  <h2>1. What is the MATLAB Tensor Core toolbox?</h2>
+
+  <p>
+    The
+    <a href="https://github.com/north-numerical-computing/MATLAB-tensor-core">
+      MATLAB Tensor Core repository
+    </a>
+    provides accurate numerical models of tensor and matrix
+    cores implemented in MATLAB.
+  </p>
+
+  <p>
+    The toolbox includes models for several NVIDIA GPU
+    architectures, including Volta, Ampere, Hopper, Ada
+    Lovelace and Blackwell. It also includes AMD Matrix Core
+    models for CDNA generations 1, 2 and 3.
+  </p>
+
+  <p>
+    The models simulate matrix multiplication using
+    floating-point inputs and outputs, together with
+    configurable accumulation behaviour.
+  </p>
+
+  <h2>2. Supported GPU architectures</h2>
+
+  <p>The repository includes models for the following architectures:</p>
+
+  <ul>
+    <li><strong>NVIDIA Volta:</strong> V100</li>
+    <li><strong>NVIDIA Ampere:</strong> A100, A2, A30 and A40</li>
+    <li><strong>NVIDIA Hopper:</strong> H100 and GH200</li>
+    <li><strong>NVIDIA Ada Lovelace:</strong> RTX-1000 and L40S</li>
+    <li><strong>NVIDIA Blackwell:</strong> B200</li>
+    <li><strong>NVIDIA RTX Blackwell:</strong> RTX PRO 6000</li>
+    <li><strong>AMD CDNA 1:</strong> M100</li>
+    <li><strong>AMD CDNA 2:</strong> MI210 and MI250</li>
+    <li><strong>AMD CDNA 3:</strong> MI300, MI300A and MI300X</li>
+  </ul>
+
+  <h2>3. Installation and setup</h2>
+
+  <p>
+    The toolbox requires MATLAB (or GNU Octave) and the
+    CPFloat custom-precision floating-point simulator.
+  </p>
+
+  <p><strong>Step 1: Download the MATLAB Tensor Core repository.</strong></p>
+
+  <p>
+    Clone the repository using Git:
+  </p>
+
+  <pre><code>git clone https://github.com/north-numerical-computing/MATLAB-tensor-core.git</code></pre>
+
+  <p>
+    Alternatively, download the repository as a ZIP file
+    from GitHub.
+  </p>
+
+  <p><strong>Step 2: Set up CPFloat.</strong></p>
+
+  <p>
+    Download and configure CPFloat using its installation
+    instructions:
+  </p>
+
+  <p>
+    <a href="https://github.com/north-numerical-computing/cpfloat">
+      CPFloat GitHub repository
+    </a>
+  </p>
+
+  <p>
+    For MATLAB, compile its MEX interface using
+    <code>make mexmat</code> where Make is available.
+    Add CPFloat's <code>bin/</code> directory to the
+    MATLAB search path.
+  </p>
+
+  <p><strong>Step 3: Add the toolbox directories to MATLAB.</strong></p>
+
+  <p>
+    Navigate to the downloaded MATLAB Tensor Core repository
+    and execute:
+  </p>
+
+  <pre><code>addpath('models');
+addpath('models/tools');</code></pre>
+
+  <p>
+    You are now ready to use the built-in GPU models.
+  </p>
+
+  <h2>4. Your first Tensor Core matrix multiplication</h2>
+
+  <p>
+    Let us start with a simple example using the NVIDIA
+    Blackwell B200 Tensor Core model.
+  </p>
+
+  <p>
+    We will use FP16 inputs and FP32 outputs.
+  </p>
+
+  <pre><code>% Define input and output formats
+inopts.format = 'binary16';
+outopts.format = 'binary32';
+
+% Generate random matrices and round to FP16
+A = cpfloat(rand(4,4), inopts);
+B = cpfloat(rand(4,4), inopts);
+
+% Perform matrix multiplication using B200
+D = B200TC(1, A, B, 1, 0, ...
+           inopts.format, outopts.format);</code></pre>
+
+  <p>
+    The function computes a matrix multiplication using
+    the B200 Tensor Core model.
+  </p>
+
+  <p>
+    The arguments specify the scaling factors, input
+    matrices and floating-point formats. In this example,
+    alpha is 1 and beta is 0.
+  </p>
+
+  <div class="note">
+    <strong>Note:</strong> The example uses the built-in
+    B200 model. You do not need to own an NVIDIA B200 GPU
+    to run this numerical model.
+  </div>
+
+  <h2>5. Experimenting with FP8 arithmetic</h2>
+
+  <p>
+    Modern accelerators also support low-precision formats
+    such as FP8. We can use the same model with FP8 inputs.
+  </p>
+
+  <pre><code>% Set FP8 input format
+inopts.format = 'fp8-e4m3';
+
+% Generate and round input matrices
+A = cpfloat(rand(4,4), inopts);
+B = cpfloat(rand(4,4), inopts);
+
+% Perform multiplication
+D = B200TC(1, A, B, 1, 0, ...
+           inopts.format, outopts.format);</code></pre>
+
+  <p>
+    This example illustrates how the model can be used
+    to investigate the numerical behaviour of matrix
+    multiplication under different input precisions.
+  </p>
+
+  <h2>6. Understanding the numerical behaviour</h2>
+
+  <p>
+    One of the main advantages of these models is that
+    they allow researchers to investigate numerical
+    characteristics of specialised matrix hardware.
+  </p>
+
+  <p>Some of the features investigated include:</p>
+
+  <ul>
+    <li>Support for subnormal floating-point numbers.</li>
+    <li>Extra bits used for significand alignment.</li>
+    <li>Additional carry bits during accumulation.</li>
+    <li>Rounding modes and normalisation behaviour.</li>
+    <li>Effective FMA accumulation size.</li>
+  </ul>
+
+  <p>
+    These characteristics are important when studying
+    numerical accuracy, reproducibility and the effects
+    of reduced-precision arithmetic in scientific computing.
+  </p>
+
+  <h2>7. Running experiments and validation</h2>
+
+  <p>
+    The repository also provides experiments and model
+    validation data. These are useful starting points
+    for understanding how the models can be used in
+    numerical studies.
+  </p>
+
+  <p>
+    Explore the following directories:
+  </p>
+
+  <ul>
+    <li><code>models/</code> — GPU architecture models.</li>
+    <li><code>models/tools/</code> — Supporting MATLAB functions.</li>
+    <li><code>experiments/</code> — Example numerical experiments.</li>
+    <li><code>model_validation/</code> — Model validation data.</li>
+  </ul>
+
+  <h2>8. Conclusion</h2>
+
+  <p>
+    The MATLAB Tensor Core toolbox provides a useful
+    environment for studying the numerical behaviour of
+    modern GPU matrix multiplication hardware.
+  </p>
+
+  <p>
+    By experimenting with different input and output
+    formats, researchers can investigate the effects of
+    floating-point precision, accumulation and rounding
+    on matrix computations.
+  </p>
+
+  <p>
+    The toolbox is particularly useful for research in
+    numerical linear algebra, high-performance computing
+    and mixed-precision algorithms.
+  </p>
+
+  <h2>Resources</h2>
+
+  <ul>
+    <li>
+      <a href="https://github.com/north-numerical-computing/MATLAB-tensor-core">
+        MATLAB Tensor Core — GitHub repository
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/north-numerical-computing/cpfloat">
+        CPFloat — GitHub repository
+      </a>
+    </li>
+  </ul>
+
+</main>
+
+<footer>
+  <a href="/blog/">← Back to Blog</a>
+  <p>© 2026 Faizan A. Khattak</p>
+</footer>
+
+</body>
+</html>
