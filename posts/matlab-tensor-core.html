@@ -1,89 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Modelling NVIDIA Tensor Cores and AMD Matrix Cores | Faizan</title>
+  <title>Modelling NVIDIA Tensor Cores and AMD Matrix Cores Using MATLAB · Faizan A. Khattak</title>
 
   <meta name="description" content="A practical introduction to MATLAB models of NVIDIA Tensor Cores and AMD Matrix Cores, including installation, FP16 and FP8 examples.">
-
-  <style>
-    body {
-      max-width: 850px;
-      margin: 60px auto;
-      padding: 0 24px;
-      font-family: Arial, sans-serif;
-      line-height: 1.8;
-      color: #252525;
-      background: #fff;
-    }
-
-    a {
-      color: #2864a0;
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    header {
-      margin-bottom: 55px;
-    }
-
-    header a { margin-right: 20px; }
-
-    h1 {
-      font-size: 36px;
-      line-height: 1.25;
-    }
-
-    h2 {
-      margin-top: 45px;
-      font-size: 25px;
-    }
-
-    .meta {
-      color: #777;
-      font-size: 14px;
-    }
-
-    pre {
-      background: #f4f4f4;
-      padding: 18px;
-      overflow-x: auto;
-      border-radius: 6px;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    code {
-      font-family: monospace;
-    }
-
-    .note {
-      background: #f5f7fa;
-      padding: 15px 20px;
-      border-left: 3px solid #2864a0;
-      margin: 25px 0;
-    }
-
-    footer {
-      margin-top: 65px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
-      color: #888;
-      font-size: 13px;
-    }
-  </style>
+  <link rel="canonical" href="https://faiziktk.github.io/posts/matlab-tensor-core.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modelling NVIDIA Tensor Cores and AMD Matrix Cores Using MATLAB">
+  <meta property="og:url" content="https://faiziktk.github.io/posts/matlab-tensor-core.html">
+  <meta name="author" content="Faizan A. Khattak">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2333'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fbfaf7' text-anchor='middle'%3EFK%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
 </head>
 
 <body>
 
-<header>
-  <a href="/">Faizan A. Khattak</a>
-  <a href="/blog/">Blog</a>
-  <a href="/">Home</a>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="/">Faizan A. Khattak<span>.</span></a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/#publications">Publications</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+    </nav>
+  </div>
 </header>
 
 <main>
@@ -609,7 +555,7 @@ addpath('models/tools');</code></pre>
 </main>
 
 <footer>
-  <a href="/blog/">← Back to Blog</a>
+  <a href="/blog/">← All articles</a>
   <p>© 2026 Faizan A. Khattak</p>
 </footer>
 
