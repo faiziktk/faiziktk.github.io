@@ -1,115 +1,58 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Faizan A. Khattak</title>
-  <meta name="description" content="Research notes and technical articles on GPU computing, numerical linear algebra and high-performance computing.">
-
-  <style>
-    body {
-      max-width: 850px;
-      margin: 60px auto;
-      padding: 0 24px;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      color: #252525;
-      background: #fff;
-    }
-
-    a { color: #2864a0; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    header { margin-bottom: 65px; }
-    header a { margin-right: 20px; }
-
-    h1 { font-size: 38px; }
-    .intro { color: #666; margin-bottom: 45px; }
-
-    .post {
-      padding: 25px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .category {
-      color: #777;
-      font-size: 13px;
-    }
-
-    footer {
-      margin-top: 70px;
-      color: #888;
-      font-size: 13px;
-    }
-  </style>
+  <title>Research Notes &amp; Blog · Faizan A. Khattak</title>
+  <meta name="description" content="Research notes and technical articles by Faizan A. Khattak on GPU computing, numerical linear algebra and high-performance computing.">
+  <link rel="canonical" href="https://faiziktk.github.io/blog/">
+  <meta property="og:title" content="Research Notes &amp; Blog · Faizan A. Khattak">
+  <meta property="og:url" content="https://faiziktk.github.io/blog/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2333'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fbfaf7' text-anchor='middle'%3EFK%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
 </head>
-
 <body>
 
-<header>
-  <a href="/">Faizan A. Khattak</a>
-  <a href="/">Home</a>
-  <a href="/blog/">Blog</a>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="/">Faizan A. Khattak<span>.</span></a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/#publications">Publications</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <h1>Research Notes & Blog</h1>
+  <p class="kicker">Research notes</p>
+  <h1>Notes &amp; articles</h1>
+  <p class="intro">Tutorials and research notes on numerical linear algebra, GPU computing and scientific computing.</p>
 
-  <p class="intro">
-    Thoughts, tutorials and research notes on numerical
-    linear algebra, GPU computing and scientific computing.
-  </p>
+  <h2 class="list-label">Latest</h2>
 
-<h2>Latest Articles</h2>
+  <a class="post" href="/posts/matlab-tensor-core.html">
+    <p class="category">GPU Computing · MATLAB · Numerical Linear Algebra</p>
+    <h3>Modelling NVIDIA Tensor Cores and AMD Matrix Cores Using MATLAB</h3>
+    <p>A practical introduction to the MATLAB Tensor Core toolbox, exploring NVIDIA Tensor Cores, AMD Matrix Cores, floating-point precision and numerical behaviour.</p>
+    <span class="more">Read article →</span>
+  </a>
 
-<article class="post">
-  <p class="category">GPU Computing · MATLAB · Numerical Linear Algebra</p>
-  <h3>Modelling NVIDIA Tensor Cores and AMD Matrix Cores Using MATLAB</h3>
-  <p>
-    A practical introduction to the MATLAB Tensor Core toolbox,
-    exploring NVIDIA Tensor Cores, AMD Matrix Cores, floating-point
-    precision and numerical behaviour.
-  </p>
-  <a href="/posts/matlab-tensor-core.html">Read article →</a>
-</article>
+  <!--
+    Add new articles above this line, newest first. Copy one <a class="post"> block,
+    change the link, category, title and summary. Only link to pages that exist in /posts/.
+  -->
 
-<article class="post">
-  <p class="category">GPU Computing</p>
-  <h3>Understanding NVIDIA Tensor Cores</h3>
-  <p>
-    Exploring the architecture, performance and numerical
-    behaviour of NVIDIA Tensor Cores.
-  </p>
-  <a href="/posts/tensor-cores.html">Read article →</a>
-</article>
-
-<article class="post">
-  <p class="category">High Performance Computing</p>
-  <h3>AMD Matrix Cores and GPU Computing</h3>
-  <p>
-    An introduction to matrix operations on modern
-    AMD GPU architectures.
-  </p>
-  <a href="/posts/amd-matrix-cores.html">Read article →</a>
-</article>
-
-<article class="post">
-  <p class="category">Numerical Linear Algebra</p>
-  <h3>Understanding Numerical Accuracy in Matrix Multiplication</h3>
-  <p>
-    Exploring floating-point arithmetic and numerical
-    accuracy in modern computing systems.
-  </p>
-  <a href="/posts/numerical-linear-algebra.html">Read article →</a>
-</article>
+  <p class="soon">More articles coming soon.</p>
 </main>
 
-
 <footer>
-  © 2026 Faizan A. Khattak
+  <p>© 2026 Faizan A. Khattak</p>
+  <a href="/">Back to homepage</a>
 </footer>
 
 </body>
 </html>
-
